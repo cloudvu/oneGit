@@ -1,0 +1,10 @@
+    <dataSource name="PostgreSQL" driverName="PostgreSQL" user="training" password="crypted:AES:kPHokIdHAfR5PMbcsJ98JIFiOAqk6okemQtYa8D+np8="    url="jdbc:postgresql://db-training.czhmef985xre.eu-central-1.rds.amazonaws.com:5432/postgres">
+    </dataSource>
+<!--
+<dataSource name="" driverName="" user="" password="" url="">
+</dataSource>
+<dataSource name="" driverName="" user="" password="" url="">
+</dataSource>
+<dataSource name="" driverName="" user="" password="" url="">
+</dataSource>
+-->

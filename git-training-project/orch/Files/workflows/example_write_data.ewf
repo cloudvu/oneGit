@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='utf-8'?>
+<workflow xmlns:vis="http://www.ataccama.com/purity/visual" version="15.3.0.master-240723-8302-8153445c">
+	<continueOnFailure>true</continueOnFailure>
+	<groups/>
+	<multiplicity>0</multiplicity>
+	<variables>
+		<derived/>
+		<input/>
+	</variables>
+	<tasks>
+		<task mode="NORMAL" acceptMode="ALL_VALID" disabled="false" id="01 Run DQC" priority="0">
+			<executable parallelismLevel="1" class="com.ataccama.adt.task.exec.EwfDqcTask" planFile="../components/example_write_data.comp">
+				<parameters>
+					<parameter expression="&quot;toString(1)&quot;" name="wf_step"/>
+					<parameter expression="&quot;toString(&#39;Adding record into DB&#39;)&quot;" name="wf_message"/>
+				</parameters>
+			</executable>
+			<vis:visualConstraints bounds="245,38,-1,-1"/>
+		</task>
+		<task mode="NORMAL" acceptMode="AT_LEAST_ONE" disabled="false" id="03 Run DQC" priority="0">
+			<executable parallelismLevel="1" class="com.ataccama.adt.task.exec.EwfDqcTask" planFile="../components/example_write_data.comp">
+				<parameters>
+					<parameter expression="&quot;toString(3)&quot;" name="wf_step"/>
+					<parameter expression="&quot;tostring(&#39;Record has been added successfully&#39;)&quot;" name="wf_message"/>
+				</parameters>
+			</executable>
+			<vis:visualConstraints bounds="468,153,-1,-1"/>
+		</task>
+		<task mode="NORMAL" acceptMode="ALL_VALID" disabled="false" id="02 Run DQC" priority="0">
+			<executable parallelismLevel="1" class="com.ataccama.adt.task.exec.EwfDqcTask" planFile="../components/example_write_data2.comp">
+				<parameters>
+					<parameter expression="&quot;toString(2)&quot;" name="wf_step"/>
+					<parameter expression="&quot;tostring(&#39;Incorrect component name&#39;)&quot;" name="wf_message"/>
+				</parameters>
+			</executable>
+			<vis:visualConstraints bounds="246,239,-1,-1"/>
+		</task>
+		<task mode="NORMAL" acceptMode="ALL_VALID" disabled="false" id="04 Run DQC" priority="0">
+			<executable parallelismLevel="1" class="com.ataccama.adt.task.exec.EwfDqcTask" planFile="../components/example_write_data.comp">
+				<parameters>
+					<parameter expression="&quot;toString(4)&quot;" name="wf_step"/>
+					<parameter expression="&quot;toString(&#39;Adding data into DB failed&#39;)&quot;" name="wf_message"/>
+				</parameters>
+			</executable>
+			<vis:visualConstraints bounds="445,349,-1,-1"/>
+		</task>
+	</tasks>
+	<links>
+		<link disabled="false" from="01 Run DQC" to="03 Run DQC" type="NORMAL">
+			<vis:visualConstraints>
+				<vis:bendpoints/>
+			</vis:visualConstraints>
+		</link>
+		<link disabled="false" from="02 Run DQC" to="03 Run DQC" type="NORMAL">
+			<vis:visualConstraints>
+				<vis:bendpoints/>
+			</vis:visualConstraints>
+		</link>
+		<link disabled="false" from="02 Run DQC" to="04 Run DQC" type="ERROR">
+			<vis:visualConstraints>
+				<vis:bendpoints/>
+			</vis:visualConstraints>
+		</link>
+	</links>
+</workflow>
